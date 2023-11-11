@@ -6,12 +6,13 @@ const router = express.Router();
 router.post('/get_link_data', (req, res) => {
     const { url } = req.body;
     if (url != undefined) {
-        // const pythonProcess = spawn('python', ["/path/to/script.py", arg1, ..]);
+        const pythonProcess = spawn('python', ["../python_yt_dl_wrapper/python_ytlp_wrapper.py", url]);
 
-        // pythonProcess.stdout.on('data', (data) => {
+         pythonProcess.stdout.on('data', (data) => {
             // Do something with the data returned from the Python script
-            // res.json(data)
-        // });
+            console.log(data); 
+            res.json(data)
+         });
     } else {
         res.status(400).send("ERROR: Bad json body.");
     }
