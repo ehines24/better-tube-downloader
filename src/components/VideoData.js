@@ -32,7 +32,7 @@ export default () => {
             <label for="trimEnd">Trim End: </label>
             <input type="number" name="trimEnd" min="0" step="0.01" /> <br />
 
-            <input for="audioFormat">Audio Format: </input>
+            <label for="audioFormat">Audio Format: </label>
             <select name="audioFormat">
                 {listAudioFormats}
             </select>
