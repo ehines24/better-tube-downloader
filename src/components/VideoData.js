@@ -1,13 +1,15 @@
 const videoTypes = ["MP4", "MKV"];
 const resolution = ["480p", "720p", "1080p"];
-
-//resolution, audio format
+const audioFormats = ["idk", "None"];
 
 export default () => {
     const listVideoType = videoTypes.map(type =>
         <option value={type}> {type} </option>
     );
     const listResolution = resolution.map(type =>
+        <option value={type}> {type} </option>
+    );
+    const listAudioFormats = audioFormats.map(type =>
         <option value={type}> {type} </option>
     );
     return (
@@ -29,6 +31,11 @@ export default () => {
             <input type="number" name="trimStart" min="0" step="0.01" /> <br />
             <label for="trimEnd">Trim End: </label>
             <input type="number" name="trimEnd" min="0" step="0.01" /> <br />
+
+            <input for="audioFormat">Audio Format: </input>
+            <select name="audioFormat">
+                {listAudioFormats}
+            </select>
         </div>
     );
 }
