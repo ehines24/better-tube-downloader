@@ -1,5 +1,10 @@
 import AdvancedDropdown from "./AdvancedDropdown.js";
 
+function prepareVideo() {
+  const url = document.getElementById('youtubeUrl').textContent;
+  console.log(url);
+}
+
 export default () => {
     return (
         <article class="App-article">
@@ -8,6 +13,8 @@ export default () => {
         </p>
         <input id="youtubeUrl" name="Youtube Link" placeholder="Youtube Link"></input>
         
+        <button id="prepBtn" onClick={prepareVideo}>Prepare Video Data</button>
+
         <AdvancedDropdown />
 
         <button id="cvtBtn">Convert</button>

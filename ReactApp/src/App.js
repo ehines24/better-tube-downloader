@@ -8,7 +8,9 @@ function App() {
         <h1>Better Youtube Downloader</h1>
       </header>
 
-      <Article />
+      <div class="cool-curve">
+        <Article />
+      </div>
       
     </div>
   );

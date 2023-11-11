@@ -1,11 +1,12 @@
 /* APP */
 .App {
   text-align: center;
+  background-color: lightcoral;
 }
 
 .App-header {
   background-color: lightcoral;
-  min-height: 50vh;
+  min-height: 35vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -13,6 +14,15 @@
   font-size: calc(10px + 2vmin);
   color: black;
 }
+
+.cool-curve {
+  border-top-left-radius: 50px;
+  border-top-right-radius: 50px;
+  background-color: white;
+  padding: 5px;
+}
+
+/* ARTICLE */
 
 .App-article {
   margin: auto;
@@ -22,7 +32,7 @@
   font-size: calc(5px + 2vmin);
 }
 
-#cvtBtn {
+#cvtBtn, #prepBtn {
   margin: 10px;
   background-color: #EA4C89;
   border-radius: 8px;
@@ -36,7 +46,7 @@
   text-decoration: none;
   transition: color 100ms;
 }
-#cvtBtn:active {
+#cvtBtn:active, #prepBtn:active {
   background-color: #F082AC;
 }
 
