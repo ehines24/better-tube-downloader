@@ -2,7 +2,7 @@
 An ultimate web frontend for yt-dlp.
 
 ## Requirements
-You will need  the following packages:
+This program is designed to work on a UNIX like system with access to the following packages:
 `yt-dlp` this will allow you to download YouTube videos
 `ffmpeg` will allow us to download different formats
 `node` this will allow React to work
