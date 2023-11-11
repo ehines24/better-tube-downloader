@@ -1,19 +1,23 @@
-const videoTypes = ["MP3"];
+const audioTypes = ["MP3"];
+const audioFormats = ["idk", "None"];
 
 // Quality
 
 export default () => {
-    const listVideoType = videoTypes.map(type =>
+    const listAudioType = audioTypes.map(type =>
+        <option value={type}> {type} </option>
+    );
+    const listAudioFormats = audioFormats.map(type =>
         <option value={type}> {type} </option>
     );
     return (
-        <div id="audioData">
+        <div id="audioData" class="hideVidAudData">
             <label for="fileName">File Name: </label>
             <input name="fileName" /> <br />
 
             <label for="videoType">Type: </label>
             <select name="videoType">
-                {listVideoType}
+                {listAudioType}
             </select> <br />
 
             <label for="trimStart">Trim Start: </label>
@@ -21,17 +25,17 @@ export default () => {
             <label for="trimEnd">Trim End: </label>
             <input type="number" name="trimEnd" min="0" step="0.01" /> <br />
 
-            <input for="audioFormat">Audio Format: </input>
+            <label for="audioFormat">Audio Format: </label>
             <select name="audioFormat">
                 {listAudioFormats}
-            </select>
+            </select> <br />
 
             <label for="title">Title: </label>
-            <input name="title" />
+            <input name="title" /> <br />
             <label for="artist">Artist: </label>
-            <input name="artist" />
+            <input name="artist" /> <br />
             <label for="album">Album: </label>
-            <input name="album" />
+            <input name="album" /> <br />
         </div>
     );
 }
