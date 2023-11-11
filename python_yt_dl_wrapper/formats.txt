@@ -6,10 +6,9 @@
 [info] Available formats for dQw4w9WgXcQ:
 ID  EXT   RESOLUTION FPS CH |   FILESIZE   TBR PROTO | VCODEC          VBR ACODEC      ABR ASR MORE INFO
 -----------------------------------------------------------------------------------------------------------------------
-sb3 mhtml 48x27        0    |                  mhtml | images                                  storyboard
-sb2 mhtml 80x45        1    |                  mhtml | images                                  storyboard
-sb1 mhtml 160x90       1    |                  mhtml | images                                  storyboard
-sb0 mhtml 320x180      1    |                  mhtml | images                                  storyboard
+sb2 mhtml 48x27        0    |                  mhtml | images                                  storyboard
+sb1 mhtml 80x45        1    |                  mhtml | images                                  storyboard
+sb0 mhtml 160x90       1    |                  mhtml | images                                  storyboard
 233 mp4   audio only        |                  m3u8  | audio only          unknown             [en] Default
 234 mp4   audio only        |                  m3u8  | audio only          unknown             [en] Default
 599 m4a   audio only      2 |  798.64KiB   31k https | audio only          mp4a.40.5   31k 22k [en] ultralow, m4a_dash
