@@ -7,7 +7,7 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+          Please enter the URL to a YouTube video that you want to download.
         </p>
         <a
           className="App-link"
