@@ -34,7 +34,7 @@
 
 #cvtBtn, #prepBtn {
   margin: 10px;
-  background-color: #EA4C89;
+  background-color: lightcoral;
   border-radius: 8px;
   border-style: none;
   color: black;
@@ -74,7 +74,7 @@
 .input-container input:focus { 
  border:none;	
  outline:none;
- border-bottom:1px solid #e74c3c;	
+ border-bottom:1px solid lightcoral;	
 }
 
 input:focus ~label, input:valid ~label {
