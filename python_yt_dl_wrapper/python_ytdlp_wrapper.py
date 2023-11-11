@@ -26,6 +26,9 @@ def spawn_out_to_file(file_path, *args): # spawn process, redirect stdout somewh
             os.waitpid(pid, 0)
         except ChildProcessError:
             print("There is no instance of yt-dlp to wait for.")
+class format():
+     def __init__(self) -> None:
+          pass
 class wrapper():
     def __init__(self, instance=1, full_path="/bin/yt-dlp") -> None:
         self.instance = instance
@@ -36,9 +39,35 @@ class wrapper():
     def download(self, url, *options):
         args = ["yt-dlp", url, *options]
         spawn(self.full_path, *args)
+    def decode_format(self, fm): # return a new format object with decoded format
+        fm = fm.replace("|", "")
+        fm = fm.replace("only", "")
+        fm = fm.replace("~", "")
+        fm = fm.replace("≈", "")
+        fm = fm.split()
+        fid = fm[0]
+        container = fm[1]
+        resolution = fm[2]
+        if(fm[2] != 'audio'):
+            fps=fm[3]
+            protocol=fm[4]
+            
+        else:
+            fps=-1
+            protocol=fm[3]
     def get_formats(self, url):
         args = ["yt-dlp", url, "-F"]
         spawn_out_to_file("formats.txt", self.full_path, *args)
+        with open("formats.txt", "r") as formats:
+             start = False
+             for line in formats:
+                  if start:
+                       self.decode_format(line)
+                  if "-" not in line:
+                       continue
+                  elif "-" in line:
+                       start = True
+                       continue
 
 if __name__ == "__main__":
     a_wrapper = wrapper()
