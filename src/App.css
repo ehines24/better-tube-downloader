@@ -55,6 +55,6 @@
 
 /* VIDEO DATA */
 
-#videoData {
+#videoData, #audioData {
   overflow: auto;
 }
