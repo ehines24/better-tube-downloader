@@ -39,26 +39,15 @@ class wrapper():
     def download(self, url, *options):
         args = ["yt-dlp", url, *options]
         spawn(self.full_path, *args)
-    def decode_format_header(self, header, exclude=""):
-         last_space = True
-         result = []
-         header = header.replace("|", "")
-         header = header.replace(exclude, "")
-         for i,c in enumerate(header):
-            if c != " " and last_space:
-                 last_space = False
-                 result.append(i)
-            elif c == " ":
-                 last_space = True
-         return result, header
-    def decode_format(self, fm, header_slices, header): # return a new format object with decoded format
-        fm = fm.replace("|", "")
+    def decode_format(self, fm): # return a new format object with decoded format
         result = {}
-        for i, elem in enumerate(header_slices):
-              if(i+1 >= len(header_slices)):
-                   result[header[elem:]] = fm[elem:]
-              else:
-                   result[header[elem:header_slices[i+1]]] = fm[elem:header_slices[i+1]]        
+        result["ID"] =  fm[0:3].replace(" ", "")
+        result["EXT"] = fm[4:9].replace(" ", "")
+        result["RESOLUTION"] = fm[10:20].replace(" ", "")
+        result["CH"] = fm[26].replace(" ", "")
+        result["FILESIZE"] = fm[31:40].replace(" ", "")
+        result["VCODEC"] = fm[56:69].replace(" ", "")
+        result["ACODEC"] = fm[76:87].replace(" ", "")
         return result
     def get_formats(self, url):
         args = ["yt-dlp", url, "-F"]
@@ -70,17 +59,15 @@ class wrapper():
              fms = []
              for line in formats:
                   if start:
-                       fms.append(self.decode_format(line, header_slices, header))
-                  if "ID" in line:
-                       header_slices, header = self.decode_format_header(line, exclude="MORE INFO\n")
+                       fms.append(self.decode_format(line))
                   if "-" not in line:
                        continue
                   elif "-" in line:
                        start = True
                        continue
-             print([fms[i]['FILESIZE   '] for i in range(len(fms))])
+             print(fms)
 if __name__ == "__main__":
     a_wrapper = wrapper()
     a_wrapper.check_version()
-    a_wrapper.get_formats("https://www.youtube.com/watch?v=dQw4w9WgXcQ")
+    a_wrapper.get_formats("https://www.youtube.com/watch?v=S7TUe5w6RHo")
     
