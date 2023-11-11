@@ -1,7 +1,7 @@
 import AdvancedDropdown from "./AdvancedDropdown.js";
 
 function prepareVideo() {
-  const url = document.getElementById('youtubeUrl').textContent;
+  const url = document.getElementById('youtubeUrl').value;
   console.log(url);
 }
 
