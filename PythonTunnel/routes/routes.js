@@ -12,6 +12,8 @@ router.post('/get_link_data', (req, res) => {
             // Do something with the data returned from the Python script
             // res.json(data)
         // });
+    } else {
+        res.status(400).send("ERROR: Bad json body.");
     }
 });
 
