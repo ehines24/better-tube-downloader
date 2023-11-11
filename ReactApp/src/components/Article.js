@@ -11,13 +11,16 @@ export default () => {
         <p>
           Please enter the URL to a YouTube video that you want to download.
         </p>
-        <input id="youtubeUrl" name="Youtube Link" placeholder="Youtube Link"></input>
+        <div class="input-container">
+		      <input id="youtubeUrl" type="text" required="required" />
+		      <label id="youtubeUrlLabel">Youtube Link</label>		
+	      </div>
         
         <button id="prepBtn" onClick={prepareVideo}>Prepare Video Data</button>
 
         <AdvancedDropdown />
 
-        <button id="cvtBtn">Convert</button>
+        <button id="cvtBtn">Convert & Download</button>
       </article>
     );
 }
