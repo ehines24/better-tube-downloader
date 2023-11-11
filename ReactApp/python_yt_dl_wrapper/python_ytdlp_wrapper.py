@@ -12,7 +12,7 @@ def spawn(*args): # spawn a process and wait for it to complete
             os.waitpid(pid, 0)
         except ChildProcessError:
             print("There is no instance of yt-dlp to wait for.")
-def spawn_out_to_file(file_path, *args): # spawn process, redirect stdout somewhere eles
+def spawn_out_to_file(file_path, *args): # spawn process, redirect stdout somewhere else
     pid = os.fork()
     if pid == 0:
         try:
@@ -30,9 +30,10 @@ class format():
      def __init__(self) -> None:
           pass
 class wrapper():
-    def __init__(self, instance=1, full_path="/bin/yt-dlp") -> None:
+    def __init__(self, instance=1, full_path="/bin/yt-dlp", fms={}) -> None:
         self.instance = instance
         self.full_path = full_path
+        self.fms = fms
     def check_version(self):
         args = ["yt-dlp", "--version"]
         spawn(self.full_path, *args)
@@ -49,12 +50,12 @@ class wrapper():
         result["VCODEC"] = fm[56:69].replace(" ", "")
         result["ACODEC"] = fm[76:87].replace(" ", "")
         return result
-    def get_formats(self, url):
+    def get_formats(self, url, cached=False):
+        if(cached):
+             return self.fms
         args = ["yt-dlp", url, "-F"]
         spawn_out_to_file("formats.txt", self.full_path, *args)
         with open("formats.txt", "r") as formats:
-             header_slices = []
-             header = ""
              start = False
              fms = []
              for line in formats:
@@ -65,9 +66,45 @@ class wrapper():
                   elif "-" in line:
                        start = True
                        continue
-             print(fms)
+             self.fms = fms
+             return fms
+    def formats_where(self, keys, values): # Find desired properties from cached video format list
+        append = True
+        subset = []
+        for fm in self.fms:
+             for i, key in enumerate(keys):
+                  if(fm[key] != values[i]):
+                       append = False
+             if append:
+                  subset.append(fm)
+             append = True
+        return subset
+    def formats_where_not(self, keys, values):
+        append = True
+        subset = []
+        for fm in self.fms:
+             for i, key in enumerate(keys):
+                  if(fm[key] == values[i]):
+                       append = False
+             if append:
+                  subset.append(fm)
+             append = True
+        return subset
+    def format_marginal(self, key, subset=[]): # A list of every value corresponding to key in the video format list (subset if it isn't empty)
+         result = []
+         if subset:
+              for fm in subset:
+                   result.append(fm[key])
+              return result
+         for fm in self.fms:
+              result.append(fm[key])
+         return result
 if __name__ == "__main__":
     a_wrapper = wrapper()
     a_wrapper.check_version()
     a_wrapper.get_formats("https://www.youtube.com/watch?v=S7TUe5w6RHo")
-    
+    #print(a_wrapper.format_marginal('VCODEC'))
+    one44 = a_wrapper.formats_where_not(['ACODEC', 'VCODEC', 'RESOLUTION'], ['videoonly', 'images', 'audioonly'])
+    print(one44)
+    one44_ids = a_wrapper.format_marginal('ID', one44)
+    a_wrapper.download("https://www.youtube.com/watch?v=S7TUe5w6RHo", f"-f {one44_ids[0]}")
