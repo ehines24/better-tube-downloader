@@ -1,23 +1,15 @@
-import logo from './logo.svg';
 import './App.css';
+import Article from './components/Article.js';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Please enter the URL to a YouTube video that you want to download.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+      <header class="App-header">
+        <h1>Better Youtube Downloader</h1>
       </header>
+
+      <Article />
+      
     </div>
   );
 }
