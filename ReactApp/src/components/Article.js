@@ -1,8 +1,15 @@
 import AdvancedDropdown from "./AdvancedDropdown.js";
 
-function prepareVideo() {
+async function prepareVideo() {
   const url = document.getElementById('youtubeUrl').value;
   console.log(url);
+  const response = await fetch("http://localhost:4000/api/get_link_data", {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ url: url })
+  });
 }
 
 export default () => {
