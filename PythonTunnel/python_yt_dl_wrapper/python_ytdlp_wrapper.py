@@ -1,6 +1,7 @@
 #!/bin/python
 import os
-from sys import argv, stdout
+from sys import argv
+from json import dumps
 def spawn(*args): # spawn a process and wait for it to complete
     pid = os.fork()
     if pid == 0:
@@ -101,13 +102,12 @@ class wrapper():
               result.append(fm[key])
          return result
 if __name__ == "__main__":
-     if len(argv) >= 2:
-          url = argv[1]
-     else:
-          print("You need a URL to continue")
-          exit(1)
-     a_wrapper = wrapper()
-     a_wrapper.download(url)
-     print("I just downloaded something")
-     stdout.flush()
-     exit(0)
+     with open('logger.txt', 'w+') as logger:
+          if len(argv) >= 2:
+               url = argv[1]
+          else:
+               print("You need a URL to continue", file=logger)
+               exit(1)
+          a_wrapper = wrapper()
+          print(dumps(a_wrapper.get_formats(url)))
+          exit(0)
