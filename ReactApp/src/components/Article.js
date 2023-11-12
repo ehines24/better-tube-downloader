@@ -10,6 +10,8 @@ async function prepareVideo() {
     },
     body: JSON.stringify({ url: url })
   });
+  const body = await response.json();
+  console.log(body);
 }
 
 export default () => {
