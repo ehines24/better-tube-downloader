@@ -1,6 +1,7 @@
+import { useState } from 'react';
 import AdvancedDropdown from "./AdvancedDropdown.js";
 
-async function prepareVideo() {
+async function prepareVideo(test, setTest) {
   const url = document.getElementById('youtubeUrl').value;
   console.log(url);
   const response = await fetch("http://localhost:4000/api/get_link_data", {
@@ -11,10 +12,26 @@ async function prepareVideo() {
     body: JSON.stringify({ url: url })
   });
   const body = await response.json();
-  console.log(body);
+  const typeArr = body.reduce((rec, x) => {
+    if (rec.every(y => y!=x['EXT'])) {
+      rec.push(x['EXT']);
+    }
+    return rec;
+  }, []);
+  console.log(typeArr);
+  for (let i = 0; i < typeArr.length; i++) {
+    setTest([
+      ...test,typeArr[i]
+    ]);
+  }
+  // typeArr.forEach(x => setTest([
+  //   ...test,x
+  // ]));
+  
 }
 
 export default () => {
+  const [test, setTest] = useState([]);
     return (
         <article class="App-article">
         <p>
@@ -25,9 +42,9 @@ export default () => {
 		      <label id="youtubeUrlLabel">Youtube Link</label>		
 	      </div>
         
-        <button id="prepBtn" onClick={prepareVideo}>Prepare Video Data</button>
+        <button id="prepBtn" onClick={() => prepareVideo(test, setTest)}>Prepare Video Data</button>
 
-        <AdvancedDropdown />
+        <AdvancedDropdown test={test}/>
 
         <button id="cvtBtn">Convert & Download</button>
       </article>

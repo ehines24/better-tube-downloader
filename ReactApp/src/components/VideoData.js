@@ -1,8 +1,7 @@
-const videoTypes = ["MP4", "MKV"];
 const resolution = ["480p", "720p", "1080p"];
 const audioFormats = ["idk", "None"];
 
-export default () => {
+export default ({videoTypes}) => {
     const listVideoType = videoTypes.map(type =>
         <option value={type}> {type} </option>
     );
