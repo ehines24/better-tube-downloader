@@ -109,5 +109,6 @@ if __name__ == "__main__":
                print("You need a URL to continue", file=logger)
                exit(1)
           a_wrapper = wrapper()
-          print(dumps(a_wrapper.get_formats(url)))
+          #print(dumps(a_wrapper.get_formats(url)))
+          a_wrapper.download(url, '-f', '315', '--output', '315.webm')
           exit(0)

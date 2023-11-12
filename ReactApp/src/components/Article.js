@@ -12,18 +12,9 @@ async function prepareVideo(test, setTest) {
     body: JSON.stringify({ url: url })
   });
   const body = await response.json();
-  const typeArr = body.reduce((rec, x) => {
-    if (rec.every(y => y!=x['EXT'])) {
-      rec.push(x['EXT']);
-    }
-    return rec;
-  }, []);
-  console.log(typeArr);
-  for (let i = 0; i < typeArr.length; i++) {
-    setTest([
-      ...test,typeArr[i]
-    ]);
-  }
+  let new_test = [].concat(body)
+  console.log(new_test);
+  setTest(new_test);
   // typeArr.forEach(x => setTest([
   //   ...test,x
   // ]));

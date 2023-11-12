@@ -40,6 +40,7 @@ function swapData(type) {
 }
 
 export default ({test}) => {
+    console.log(test);
     return (
         <div>
             <button id="advBtn" onClick={showAdvanced}>Advanced &#x25C2;</button><br />
@@ -47,7 +48,7 @@ export default ({test}) => {
                 <button id="vidBtn" class="vidAudBtn vidAudBtnActive" onClick={() => swapData(0)}>Video</button>
                 <button id="audBtn" class="vidAudBtn" onClick={() => swapData(1)}>Audio</button>
                 <br />
-
+                
                 <VideoData videoTypes={test} />
                 <AudioData />
 
